@@ -17,5 +17,12 @@ function addBookToLibrary(title, author, pages, description) {
 }
 
 addBookToLibrary("1984", "George Orwell", 328, "Dystopian fiction");
-console.log(myLibrary);
-console.log("this is a test message");
+
+console.log((4 + 6 + 9) / 77);
+
+let book = document.getElementById('book')
+
+// function displayBooks(arr){
+//   for(let i =0,)
+// }
+
