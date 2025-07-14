@@ -17,12 +17,32 @@ function addBookToLibrary(title, author, pages, description) {
 }
 
 addBookToLibrary("1984", "George Orwell", 328, "Dystopian fiction");
+addBookToLibrary("1984", "George Orwell", 328, "Dystopian fiction");
 
-console.log((4 + 6 + 9) / 77);
+// let book = document.getElementById('book')
 
-let book = document.getElementById('book')
-
-// function displayBooks(arr){
-//   for(let i =0,)
+// function displayBooks(){
+//   for(let i =0;i<myLibrary.length;i++){
+//     book.textContent+=JSON.stringify(myLibrary[i]) 
+//   }
 // }
+// displayBooks()
 
+ const container = document.getElementById("card-container");
+
+  myLibrary.forEach(book => {
+    const card = document.createElement("div");
+    card.style.padding = "16px";
+    card.style.borderRadius = "8px";
+    card.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+    card.style.width = "150px";
+
+    card.innerHTML = `
+      <h3>${book.title}</h3>
+      <p>${book.author}</p>
+      <p>${book.pages}</p>
+      <p>${book.description}</p>
+    `;
+
+    container.appendChild(card);
+  });
