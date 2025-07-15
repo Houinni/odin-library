@@ -7,7 +7,22 @@
 </head>
 <body>
     <h1>Welcome to My Book Library</h1>
-    <button id = "test">BUTTON</button>
+    <button id = "addBookBtn">ADD BOOK</button>
+    <dialog>
+        <form method="dialog" id="dialogForm">
+            <button type="button" id = 'closeBtn'>Close</button>
+            <p>AUTHOR</p>
+            <input id = 'authorEl' placeholder="Ex. George Orwell" type="text">
+            <p>TITLE</p>
+            <input id = 'titleEl' placeholder="Ex. 1984" type="text">
+            <p>NUMBER OF PAGES</p>
+            <input id = 'pagesEl' placeholder="Ex. 328" type="text">
+            <p>DESCRIPTION</p>
+            <input id = 'descriptionEl' placeholder="Ex. Dystopian fiction" type="text">
+            <button type="submit">SUBMIT</button>
+        </form>
+        
+    </dialog>
     <pre id="log"></pre>
     <script src="index.js" defer></script>
     <!-- <div class="'card">

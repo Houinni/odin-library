@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 // a book might have title, author, pages, description
 function Book(title,author,pages,description) {
@@ -14,23 +14,17 @@ function Book(title,author,pages,description) {
 function addBookToLibrary(title, author, pages, description) {
     const newBook = new Book(title,author,pages,description);
     myLibrary.push(newBook);
+    console.log("📚 Book added:", newBook);
+    console.log("📚 Current library:", myLibrary);
 }
 
-addBookToLibrary("1984", "George Orwell", 328, "Dystopian fiction");
-addBookToLibrary("1984", "George Orwell", 328, "Dystopian fiction");
 
-// let book = document.getElementById('book')
 
-// function displayBooks(){
-//   for(let i =0;i<myLibrary.length;i++){
-//     book.textContent+=JSON.stringify(myLibrary[i]) 
-//   }
-// }
-// displayBooks()
-
- const container = document.getElementById("card-container");
-
+const container = document.getElementById("card-container");
+function render(){
+  container.innerHTML = "";
   myLibrary.forEach(book => {
+
     const card = document.createElement("div");
     card.style.padding = "16px";
     card.style.borderRadius = "8px";
@@ -42,7 +36,50 @@ addBookToLibrary("1984", "George Orwell", 328, "Dystopian fiction");
       <p>${book.author}</p>
       <p>${book.pages}</p>
       <p>${book.description}</p>
-    `;
+      `;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => {
+      myLibrary=myLibrary.filter(b => b.id !== book.id);
+      render();
+    });
+
+    const stateBtn = document.createElement("button")
+    deleteBtn.textContent = "";
+
+    card.appendChild(deleteBtn);
     container.appendChild(card);
-  });
+    });
+}
+  
+
+
+//when user clicks add book, a new form opens that user can type in 
+//attributes 
+const dialog = document.querySelector("dialog")
+const closeBtn = document.getElementById('closeBtn')
+const addBookBtn = document.getElementById('addBookBtn')
+const form = document.getElementById("dialogForm");
+
+const authorEl = document.getElementById("authorEl")
+const titleEl = document.getElementById("titleEl")
+const pagesEl = document.getElementById("pagesEl")
+const descriptionEl = document.getElementById("descriptionEl")
+
+addBookBtn.addEventListener("click", () =>{
+  dialog.showModal();
+});
+closeBtn.addEventListener("click", () =>{
+  dialog.close();
+});
+form.addEventListener("submit", (e) =>{
+  e.preventDefault();
+  let author = authorEl.value;
+  let title = titleEl.value;
+  let pages = pagesEl.value;
+  let description = descriptionEl.value;
+  addBookToLibrary(title, author, pages, description)
+  render()
+  dialog.close();
+})
