@@ -1,12 +1,13 @@
 let myLibrary = [];
 
 // a book might have title, author, pages, description
-function Book(title,author,pages,description) {
+function Book(title,author,pages,description,hasRead=false) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author= author;
     this.pages = pages;
     this.description = description;
+    this.hasRead = hasRead
   // the constructor...
 }
 
@@ -18,7 +19,9 @@ function addBookToLibrary(title, author, pages, description) {
     console.log("📚 Current library:", myLibrary);
 }
 
-
+Book.prototype.toggleRead = function () {
+  this.hasRead = !this.hasRead;
+};
 
 const container = document.getElementById("card-container");
 function render(){
@@ -35,7 +38,8 @@ function render(){
       <h3>${book.title}</h3>
       <p>${book.author}</p>
       <p>${book.pages}</p>
-      <p>${book.description}</p>
+      <p>${book.description}</p>\
+      <p><strong>Read:</strong> ${book.hasRead ? "✅" : "❌"}</p>
       `;
 
     const deleteBtn = document.createElement("button");
@@ -46,8 +50,13 @@ function render(){
     });
 
     const stateBtn = document.createElement("button")
-    deleteBtn.textContent = "";
+    stateBtn.textContent= book.hasRead ? "Mark as Unread" : "Mark as Read";
+    stateBtn.addEventListener("click", () =>{
+      book.toggleRead();
+      render()
+    })
 
+    card.appendChild(stateBtn)
     card.appendChild(deleteBtn);
     container.appendChild(card);
     });
@@ -66,6 +75,7 @@ const authorEl = document.getElementById("authorEl")
 const titleEl = document.getElementById("titleEl")
 const pagesEl = document.getElementById("pagesEl")
 const descriptionEl = document.getElementById("descriptionEl")
+
 
 addBookBtn.addEventListener("click", () =>{
   dialog.showModal();
